@@ -86,6 +86,20 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Collyn Godlewski',
+    date: 'May 4th, 1998',
+    firstParagraph: 'hehe ho ho hehe ho ho hehe ho ho',
+    secondParagraph: 'Wanna hear a funny story?',
+    thirdParagraph: ' I would like to hear one too.'
+  },
+  {
+    title: 'Denise Herlein',
+    date: 'I am so bad with birthdays',
+    firstParagraph: 'please dont be mad at me mom',
+    secondParagraph: 'Look what I can do, please',
+    thirdParagraph: 'forgive me and be proud <3'
   }
 ];
 
@@ -102,7 +116,63 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+*/
 
+const articles = document.querySelector('.articles');
+
+
+
+
+function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagraph}){
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articlePara1 = document.createElement('p');
+  const articlePara2 = document.createElement('p');
+  const articlePara3 = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(articlePara1);
+  article.appendChild(articlePara2);
+  article.appendChild(articlePara3);
+  article.appendChild(expandButton);
+
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articlePara1.textContent = firstParagraph;
+  articlePara2.textContent = secondParagraph;
+  articlePara3.textContent = thirdParagraph;
+  expandButton.textContent = '+';
+
+  expandButton.addEventListener('click', evt =>{
+    article.classList.toggle('article-open');
+  })
+
+
+
+  return article;
+}
+
+
+const articleElements = data.map(elem =>{
+  return articleMaker(elem)
+})
+
+
+console.log(articleElements);
+
+
+articleElements.forEach(elemToAdd =>{
+  articles.appendChild(elemToAdd);
+})
+
+/*
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
